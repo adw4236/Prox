@@ -3,12 +3,28 @@
     <head>
         <title>Hello World</title>
 
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <script src="cordova.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/materialize.min.css" />
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="css/general.css">
+        <script type="text/javascript" src="js/general.js"></script>
     </head>
     <body>
 
+        <nav class="red">
+            <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            Prox
+        </nav>
+
+        <ul id="sidenav" class="sidenav">
+            <li id="nav_title" class="red">
+                <h4>Menu</h4>
+            </li>
+            <li><a href="."><i class="material-icons">home</i>Home</a></li>
+        </ul>
 
     </body>
 </html>

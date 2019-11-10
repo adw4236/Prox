@@ -1,0 +1,10 @@
+#nav_title *{
+    margin: 0;
+    padding: 25px 0 10px 10px;
+}
+.red{
+    color: white;
+}
+#sidenav li a{
+    cursor: pointer;
+}
