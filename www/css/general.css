@@ -22,3 +22,13 @@
 #sidenav i{
     font-size: 20px;
 }
+
+.primary-btn{
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
+
+#actions #actions-template{
+    display: none;
+}
