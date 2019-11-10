@@ -19,3 +19,6 @@
 #sidenav li a{
     cursor: pointer;
 }
+#sidenav i{
+    font-size: 20px;
+}

@@ -1,0 +1,88 @@
+/*
+ * New icon fonts can be generated at https://icomoon.io/app/
+ */
+
+@font-face {
+    font-family: 'icons';
+    src: url('fonts/icons.eot?m63mne');
+    src: url('fonts/icons.eot?m63mne#iefix') format('embedded-opentype'),
+         url('fonts/icons.ttf?m63mne') format('truetype'),
+         url('fonts/icons.woff?m63mne') format('woff'),
+         url('fonts/icons.svg?m63mne#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-like:before {
+    content: "\e90b";
+}
+.icon-more:before {
+    content: "\e90c";
+}
+.icon-pin:before {
+    content: "\e90d";
+}
+.icon-settings:before {
+    content: "\e90e";
+}
+.icon-shown:before {
+    content: "\e90f";
+}
+.icon-done:before {
+    content: "\e910";
+}
+.icon-hidden:before {
+    content: "\e911";
+}
+.icon-less:before {
+    content: "\e912";
+}
+.icon-home:before {
+    content: "\e90a";
+}
+.icon-actions:before {
+    content: "\e900";
+}
+.icon-add:before {
+    content: "\e901";
+}
+.icon-delete:before {
+    content: "\e902";
+}
+.icon-discovery:before {
+    content: "\e903";
+}
+.icon-edit:before {
+    content: "\e904";
+}
+.icon-menu:before {
+    content: "\e905";
+}
+.icon-more1:before {
+    content: "\e906";
+}
+.icon-packing:before {
+    content: "\e907";
+}
+.icon-travel:before {
+    content: "\e908";
+}
+.icon-x:before {
+    content: "\e909";
+}
