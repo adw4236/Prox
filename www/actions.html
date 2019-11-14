@@ -32,13 +32,34 @@
             <li><a href="settings.html"><i class="icon-settings"></i>Settings</a></li>
         </ul>
 
-        <ul id="actions" class="collection">
-            <li id="actions-template" class="collection-item">
+        <div id="actions" class="collection">
+            <a href="action/edit.html?action=" id="actions-template" class="collection-item">
                 <span class="name"></span>
-            </li>
-        </ul>
+            </a>
+        </div>
 
-        <a class="primary-btn btn-floating btn-large waves-effect waves-light red"><i class="icon-add"></i></a>
+        <button data-target="nameAction" class="modal-trigger primary-btn btn-floating btn-large waves-effect waves-light red"><i class="icon-add"></i></button>
+
+        <div id="nameAction" class="modal">
+            <div class="modal-content">
+                <div class="input-field inline">
+                    <input id="actionName" type="text">
+                    <label for="actionName">Action Name</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="createAction" class="btn-floating btn-big waves-effect waves-light red"><i class="icon-done"></i></button>
+            </div>
+        </div>
+
+        <script>
+            // Confirming the create action dialog
+            $("#createAction").on("click", function(){
+                let name = $("#actionName").val();
+                let id = newAction(name);
+                window.location.href = "action/edit.html?action=" + id;
+            });
+        </script>
 
     </body>
 </html>

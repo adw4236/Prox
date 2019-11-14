@@ -5,15 +5,34 @@
  * value of that attribute.
  */
 let actions = JSON.parse(localStorage.getItem("actions")) || [];
-let superPush = actions.push.bind(actions);
-actions.push = function(e){
-    superPush(e);
+
+/**
+ * Creates a new action and saves it in storage.
+ * @param name The name of the action being created
+ * @returns {number} The id of the action (index in the actions list)
+ */
+function newAction(name){
+    actions.push({name: name, triggers: [], events: []});
+    saveActions();
+    return actions.length - 1;
+}
+
+/**
+ * Removes an action and saves the changes to local storage
+ * @param id The index of the action to remove
+ */
+function removeAction(id){
+    actions.splice(id);
+    saveActions();
+}
+
+/**
+ * Saves the list of actions to local storage, should be called after any modifications.  This is automatically
+ * called after new or remove.
+ */
+function saveActions(){
     localStorage.setItem("actions", JSON.stringify(actions));
-};
-actions.remove = function(idx){
-    actions.splice(idx);
-    localStorage.setItem("actions", JSON.stringify(actions));
-};
+}
 
 /**
  * Initializes the UI for the actions by iterating through the actions list and copying the
@@ -26,17 +45,13 @@ document.addEventListener("deviceready", function(){
 
     let template = actionsList.find("#actions-template");
 
-    actions.forEach(function(action){
+    actions.forEach(function(action, id){
         let actionElement = template.clone();
         actionElement.removeAttr("id");
 
-        // This just iterates through each attribute of an action and fills in the HTML of an element with
-        // a class name matching the attribute.  If any special treatment of an attribute is needed, this
-        // is where it should be done.
-        for(let attribute in action){
-            if(!action.hasOwnProperty(attribute)) continue;
-            actionElement.find("." + attribute).html(action[attribute]);
-        }
+        // Populate the actions template here
+        actionElement.attr("href", actionElement.attr("href") + id);
+        actionElement.find(".name").html(action.name);
 
         actionsList.append(actionElement);
     });
