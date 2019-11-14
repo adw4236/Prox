@@ -67,6 +67,13 @@ document.addEventListener("deviceready", function() {
         actionElement.attr("href", actionElement.attr("href") + id);
         actionElement.find(".name").html(action.name);
 
+        actionElement.find(".delete").on("click", function(e){
+            e.preventDefault();
+            //TODO: Add a confirmation dialog
+            removeAction(id);
+            location.reload();
+        });
+
         actionsList.append(actionElement);
     });
 

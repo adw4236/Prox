@@ -41,6 +41,11 @@
 #actions-template, #trigger-template{
     display: none;
 }
+#actions, #triggers-list{
+    border: none;
+}
 #actions a, #triggers-list a{
     cursor: pointer;
+    color: black;
+    font-size: 20px;
 }
