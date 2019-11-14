@@ -85,7 +85,7 @@ document.addEventListener("deviceready", function() {
         triggerElement.removeAttr("id");
 
         // Populate the trigger template here
-        triggerElement.attr("href", triggerElement.attr("href") + "?type=" + trigger.type + "&action=" + actionId);
+        triggerElement.attr("href", triggerElement.attr("href") + "?trigger=" + JSON.stringify(trigger) + "&action=" + actionId);
         triggerElement.find(".name").html(trigger.name);
 
         triggersList.append(triggerElement);
