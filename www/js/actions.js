@@ -6,6 +6,16 @@
  */
 let actions = JSON.parse(localStorage.getItem("actions")) || [];
 
+// Gets a specific action if it is passed in by the query string.
+let query = new URLSearchParams(window.location.search);
+let actionId = query.get('action');
+let action = actionId ? actions[actionId] : null;
+
+document.addEventListener("deviceready", function(){
+    // Set all elements with the class action-name to the name of the action being edited.
+    $(".action-name").html(action.name);
+});
+
 /**
  * Creates a new action and saves it in storage.
  * @param name The name of the action being created
@@ -38,14 +48,18 @@ function saveActions(){
  * Initializes the UI for the actions by iterating through the actions list and copying the
  * template for each action, then filling in the information on the copied template and appending
  * it to the list of actions.
+ *
+ * A similar process is used for triggers and events
  */
-document.addEventListener("deviceready", function(){
+document.addEventListener("deviceready", function() {
+
+    // Actions
+
     let actionsList = $("#actions");
-    if(actionsList.length === 0) return;
+    if (actionsList.length === 0) return;
 
     let template = actionsList.find("#actions-template");
-
-    actions.forEach(function(action, id){
+    actions.forEach(function (action, id) {
         let actionElement = template.clone();
         actionElement.removeAttr("id");
 
@@ -54,5 +68,26 @@ document.addEventListener("deviceready", function(){
         actionElement.find(".name").html(action.name);
 
         actionsList.append(actionElement);
+    });
+
+});
+document.addEventListener("deviceready", function() {
+
+    // Triggers
+
+    let triggersList = $("#triggers-list");
+    if(triggersList.length === 0) return;
+    if(!action || action.triggers === null) return;
+
+    let triggerTemplate = triggersList.find("#trigger-template");
+    action.triggers.forEach(function(trigger, id){
+        let triggerElement = triggerTemplate.clone();
+        triggerElement.removeAttr("id");
+
+        // Populate the trigger template here
+        triggerElement.attr("href", triggerElement.attr("href") + "?type=" + trigger.type + "&action=" + actionId);
+        triggerElement.find(".name").html(trigger.name);
+
+        triggersList.append(triggerElement);
     });
 });

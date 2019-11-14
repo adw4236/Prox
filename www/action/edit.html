@@ -12,22 +12,12 @@
         <link rel="stylesheet" type="text/css" href="../css/general.css">
         <script type="text/javascript" src="../js/general.js"></script>
         <script src="../js/actions.js"></script>
-
-        <script>
-            let query = new URLSearchParams(window.location.search);
-            let actionId = query.get('action');
-            let action = actions[actionId];
-
-            document.addEventListener("deviceready", function(){
-                $("#title").html(action.name);
-            });
-        </script>
     </head>
     <body>
 
         <nav id="header" class="red header-large">
             <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="icon-menu"></i></a>
-            <h5 id="title"></h5>
+            <h5 class="action-name"></h5>
             <ul class="tabs red">
                 <li class="tab col s3"><a class="active" href="#triggers">Triggers</a></li>
                 <li class="tab col s3"><a href="#events">Events</a></li>
@@ -48,6 +38,31 @@
 
         <div id="triggers">
 
+            <div id="triggers-list" class="collection">
+                <a href="trigger.html" id="trigger-template" class="collection-item">
+                    <span class="name"></span>
+                </a>
+            </div>
+
+            <button data-target="newTrigger" class="modal-trigger primary-btn btn-floating btn-large waves-effect waves-light red"><i class="icon-add"></i></button>
+
+            <div id="newTrigger" class="modal">
+                <div class="modal-content">
+                    <h3>Select a type of trigger</h3>
+                    <div id="trigger-options" class="collection">
+                        <a class="collection-item" href="trigger.html?type=proximity">Proximity</a>
+                        <a class="collection-item" href="trigger.html?type=time">Time of Day</a>
+                        <a class="collection-item" href="trigger.html?type=weather">Weather</a>
+                        <a class="collection-item" href="trigger.html?type=speed">Speed</a>
+                        <a class="collection-item" href="trigger.html?type=devices">Devices</a>
+                    </div>
+                </div>
+                <script>
+                    $("#trigger-options a").each(function(){
+                        $(this).attr("href", $(this).attr("href") + "&action=" + actionId);
+                    });
+                </script>
+            </div>
         </div>
 
         <div id="events">

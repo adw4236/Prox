@@ -38,9 +38,9 @@
     bottom: 10px;
 }
 
-#actions #actions-template{
+#actions-template, #trigger-template{
     display: none;
 }
-#actions *{
+#actions a, #triggers-list a{
     cursor: pointer;
 }
