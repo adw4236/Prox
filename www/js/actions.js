@@ -13,7 +13,7 @@ let action = actionId ? actions[actionId] : null;
 
 document.addEventListener("deviceready", function(){
     // Set all elements with the class action-name to the name of the action being edited.
-    $(".action-name").html(action.name);
+    if(action) $(".action-name").html(action.name);
 });
 
 /**
