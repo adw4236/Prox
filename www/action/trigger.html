@@ -16,6 +16,17 @@
         <script>
             // Can be used in this page to get the information about the trigger.
             let trigger = JSON.parse(query.get("trigger"));
+            let triggerId = query.get("triggerId");
+
+            function save(){
+                if(triggerId === null){
+                    action.triggers.push(trigger);
+                }else{
+                    action.triggers[triggerId] = trigger;
+                }
+                saveActions();
+                window.location.href = "edit.html?action=" + actionId;
+            }
         </script>
     </head>
     <body>
@@ -36,6 +47,28 @@
             <li><a href="../packing.html"><i class="icon-packing"></i>Packing</a></li>
             <li><a href="../settings.html"><i class="icon-settings"></i>Settings</a></li>
         </ul>
+
+        <div id="proximity" style="display: none">
+            Proximity
+        </div>
+        <div id="time" style="display: none">
+            Time of Day
+        </div>
+        <div id="weather" style="display: none">
+            Weather
+        </div>
+        <div id="speed" style="display: none">
+            Speed
+        </div>
+        <div id="devices" style="display: none">
+            Devices
+        </div>
+
+        <button onclick="save()" class="modal-trigger primary-btn btn-floating btn-large waves-effect waves-light red"><i class="icon-done"></i></button>
+
+        <script>
+            $("#" + trigger.type).show();
+        </script>
 
     </body>
 </html>

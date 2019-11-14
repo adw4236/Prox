@@ -22,9 +22,9 @@ document.addEventListener("deviceready", function(){
  * @returns {number} The id of the action (index in the actions list)
  */
 function newAction(name){
-    actions.push({name: name, triggers: [], events: []});
+    let id = actions.push({name: name, triggers: [], events: []});
     saveActions();
-    return actions.length - 1;
+    return id;
 }
 
 /**
@@ -92,7 +92,7 @@ document.addEventListener("deviceready", function() {
         triggerElement.removeAttr("id");
 
         // Populate the trigger template here
-        triggerElement.attr("href", triggerElement.attr("href") + "?trigger=" + JSON.stringify(trigger) + "&action=" + actionId);
+        triggerElement.attr("href", triggerElement.attr("href") + "?trigger=" + JSON.stringify(trigger) + "&action=" + actionId + "&triggerId=" + id);
         triggerElement.find(".name").html(trigger.name);
 
         triggersList.append(triggerElement);
