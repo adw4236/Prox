@@ -9,11 +9,14 @@
     line-height: 56px;
     text-align: center;
 }
+.header-large{
+    height: 104px;
+}
 #header .tabs a{
     color: white;
 }
 #header .tabs .indicator{
-    background-color: #ffb7b7;
+    background-color: white;
 }
 #nav_title *{
     margin: 0;
