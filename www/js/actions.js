@@ -69,9 +69,22 @@ document.addEventListener("deviceready", function() {
 
         actionElement.find(".delete").on("click", function(e){
             e.preventDefault();
-            //TODO: Add a confirmation dialog
-            removeAction(id);
-            location.reload();
+            let confirmDialog = $("#confirmDelete");
+            confirmDialog.find("#deletingAction").html(action.name);
+            let confirm = M.Modal.getInstance(confirmDialog);
+            confirm.open();
+
+            let cancel = confirmDialog.find("#cancelDelete");
+            let ok = confirmDialog.find("#deleteAction");
+            cancel.on("click", function(){
+                confirm.close();
+                cancel.off("click");
+                ok.off("click");
+            });
+            ok.on("click", function(){
+                removeAction(id);
+                location.reload();
+            });
         });
 
         actionsList.append(actionElement);
