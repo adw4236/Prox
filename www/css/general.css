@@ -44,7 +44,7 @@
 #actions, #triggers-list,#events-list{
     border: none;
 }
-#actions a, #triggers-list a, #events-lis a{
+#actions a, #triggers-list a, #events-list a{
     cursor: pointer;
     color: black;
     font-size: 20px;
