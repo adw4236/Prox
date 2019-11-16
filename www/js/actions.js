@@ -22,9 +22,9 @@ document.addEventListener("deviceready", function(){
  * @returns {number} The id of the action (index in the actions list)
  */
 function newAction(name){
-    let id = actions.push({name: name, triggers: [], events: []});
+    actions.push({name: name, triggers: [], events: []});
     saveActions();
-    return id;
+    return actions.length - 1;
 }
 
 /**
