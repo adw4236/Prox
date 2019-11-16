@@ -22,9 +22,9 @@ document.addEventListener("deviceready", function(){
  * @returns {number} The id of the action (index in the actions list)
  */
 function newAction(name){
-    let id = actions.push({name: name, triggers: [], events: []});
+    actions.push({name: name, triggers: [], events: []});
     saveActions();
-    return id;
+    return actions.length - 1;
 }
 
 /**
@@ -32,7 +32,7 @@ function newAction(name){
  * @param id The index of the action to remove
  */
 function removeAction(id){
-    actions.spilce(id,1);
+    actions.splice(id,1);
     saveActions();
 }
 
@@ -69,15 +69,30 @@ document.addEventListener("deviceready", function() {
 
         actionElement.find(".delete").on("click", function(e){
             e.preventDefault();
-            //TODO: Add a confirmation dialog
-            removeAction(id);
-            location.reload();
+
+            let confirmDialog = $("#confirmDelete");
+            confirmDialog.find("#deletingAction").html(action.name);
+            let confirm = M.Modal.getInstance(confirmDialog);
+            confirm.open();
+
+            let cancel = confirmDialog.find("#cancelDelete");
+            let ok = confirmDialog.find("#deleteAction");
+            cancel.on("click", function(){
+                confirm.close();
+                cancel.off("click");
+                ok.off("click");
+            });
+            ok.on("click", function(){
+                removeAction(id);
+                location.reload();
+            });
         });
 
         actionsList.append(actionElement);
     });
 
 });
+
 document.addEventListener("deviceready", function() {
 
     // Triggers
