@@ -22,9 +22,9 @@ document.addEventListener("deviceready", function(){
  * @returns {number} The id of the action (index in the actions list)
  */
 function newAction(name){
-    actions.push({name: name, triggers: [], events: []});
+    let id = actions.push({name: name, triggers: [], events: []});
     saveActions();
-    return actions.length - 1;
+    return id;
 }
 
 /**
@@ -32,7 +32,7 @@ function newAction(name){
  * @param id The index of the action to remove
  */
 function removeAction(id){
-    actions.splice(id, 1);
+    actions.spilce(id,1);
     saveActions();
 }
 
@@ -69,22 +69,9 @@ document.addEventListener("deviceready", function() {
 
         actionElement.find(".delete").on("click", function(e){
             e.preventDefault();
-            let confirmDialog = $("#confirmDelete");
-            confirmDialog.find("#deletingAction").html(action.name);
-            let confirm = M.Modal.getInstance(confirmDialog);
-            confirm.open();
-
-            let cancel = confirmDialog.find("#cancelDelete");
-            let ok = confirmDialog.find("#deleteAction");
-            cancel.on("click", function(){
-                confirm.close();
-                cancel.off("click");
-                ok.off("click");
-            });
-            ok.on("click", function(){
-                removeAction(id);
-                location.reload();
-            });
+            //TODO: Add a confirmation dialog
+            removeAction(id);
+            location.reload();
         });
 
         actionsList.append(actionElement);
@@ -106,8 +93,29 @@ document.addEventListener("deviceready", function() {
 
         // Populate the trigger template here
         triggerElement.attr("href", triggerElement.attr("href") + "?trigger=" + JSON.stringify(trigger) + "&action=" + actionId + "&triggerId=" + id);
-        triggerElement.find(".name").html(trigger.name);
+        triggerElement.find(".name").html("<p>" + trigger.name + "</p>");
 
         triggersList.append(triggerElement);
+    });
+});
+
+document.addEventListener("deviceready", function() {
+
+    // Events
+
+    let eventsList = $("#events-list");
+    if(eventsList.length === 0) return;
+    if(!action || action.events === null) return;
+
+    let eventTemplate = eventsList.find("#event-template");
+    action.events.forEach(function(event, id){
+        let eventElement = eventTemplate.clone();
+        eventElement.removeAttr("id");
+
+        // Populate the event template here
+        eventElement.attr("href", eventElement.attr("href") + "?event=" + JSON.stringify(event) + "&action=" + actionId + "&eventId=" + id);
+        eventElement.find(".name").html("<p>" + event.name + "</p>");
+
+        eventsList.append(eventElement);
     });
 });
