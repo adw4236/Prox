@@ -50,11 +50,11 @@
                 <div class="modal-content">
                     <h3>Select a type of trigger</h3>
                     <div id="trigger-options" class="collection">
-                        <a class="collection-item" href="trigger.html?trigger={&quot;type&quot;:&quot;proximity&quot;}">Proximity</a>
-                        <a class="collection-item" href="trigger.html?trigger={&quot;type&quot;:&quot;time&quot;}">Time of Day</a>
-                        <a class="collection-item" href="trigger.html?trigger={&quot;type&quot;:&quot;weather&quot;}">Weather</a>
-                        <a class="collection-item" href="trigger.html?trigger={&quot;type&quot;:&quot;speed&quot;}">Speed</a>
-                        <a class="collection-item" href="trigger.html?trigger={&quot;type&quot;:&quot;devices&quot;}">Devices</a>
+                        <a class="collection-item" href="trigger.html?trigger={&quot;type&quot;:&quot;proximity&quot;,&quot;name&quot;:&quot;proximity&quot;}">Proximity</a>
+                        <a class="collection-item" href="trigger.html?trigger={&quot;type&quot;:&quot;time&quot;,&quot;name&quot;:&quot;time&quot;}">Time of Day</a>
+                        <a class="collection-item" href="trigger.html?trigger={&quot;type&quot;:&quot;weather&quot;,&quot;name&quot;:&quot;weather&quot;}">Weather</a>
+                        <a class="collection-item" href="trigger.html?trigger={&quot;type&quot;:&quot;speed&quot;,&quot;name&quot;:&quot;speed&quot;}">Speed</a>
+                        <a class="collection-item" href="trigger.html?trigger={&quot;type&quot;:&quot;devices&quot;,&quot;name&quot;:&quot;devices&quot;}">Devices</a>
                     </div>
                 </div>
                 <script>
@@ -66,7 +66,32 @@
         </div>
 
         <div id="events">
+            <div id="events-list" class="collection">
+                <a href="event.html" id="event-template" class="collection-item">
+                    <span class="name"></span>
+                </a>
+            </div>
 
+            <button data-target="newEvent" class="modal-trigger primary-btn btn-floating btn-large waves-effect waves-light red"><i class="icon-add"></i></button>
+
+            <div id="newEvent" class="modal">
+                <div class="modal-content">
+                    <h3>Select a type of Event</h3>
+                    <div id="event-options" class="collection">
+                        <a class="collection-item" href="event.html?event={&quot;type&quot;:&quot;notification&quot;,&quot;name&quot;:&quot;notification&quot;}">Notification</a>
+                        <a class="collection-item" href="event.html?event={&quot;type&quot;:&quot;message&quot;,&quot;name&quot;:&quot;message&quot;}">Send Message</a>
+                        <a class="collection-item" href="event.html?event={&quot;type&quot;:&quot;settings&quot;,&quot;name&quot;:&quot;settings&quot;}">Settings</a>
+                        <a class="collection-item" href="event.html?event={&quot;type&quot;:&quot;smarthome&quot;,&quot;name&quot;:&quot;smarthome&quot;}">Smart Home Event</a>
+                        <a class="collection-item" href="event.html?event={&quot;type&quot;:&quot;socialmedia&quot;,&quot;name&quot;:&quot;socialmedia&quot;}">Socail Media Event</a>
+                        <a class="collection-item" href="event.html?event={&quot;type&quot;:&quot;taxi&quot;,&quot;name&quot;:&quot;taxi&quot;}">Uber/Lyft Call</a>
+                    </div>
+                </div>
+                <script>
+                    $("#event-options a").each(function(){
+                        $(this).attr("href", $(this).attr("href") + "&action=" + actionId);
+                    });
+                </script>
+            </div>
         </div>
 
     </body>
