@@ -32,7 +32,7 @@ function newAction(name){
  * @param id The index of the action to remove
  */
 function removeAction(id){
-    actions.splice(id);
+    actions.splice(id, 1);
     saveActions();
 }
 
