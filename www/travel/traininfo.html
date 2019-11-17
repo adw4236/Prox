@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Edit</title>
+    <title>Train Information</title>
 
     <script src="../cordova.js"></script>
     <script src="../js/jquery.min.js"></script>
@@ -11,13 +11,13 @@
 
     <link rel="stylesheet" type="text/css" href="../css/general.css">
     <script type="text/javascript" src="../js/general.js"></script>
-    <script src="../js/actions.js"></script>
+    <script src="../js/travel.js"></script>
 </head>
 <body>
 
 <nav id="header" class="red">
     <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="icon-menu"></i></a>
-    <h5>New Information</h5>
+    <h5>Train Information</h5>
 </nav>
 
 <ul id="sidenav" class="sidenav">
@@ -32,10 +32,44 @@
     <li><a href="../settings.html"><i class="icon-settings"></i>Settings</a></li>
 </ul>
 
-<h4 style="margin-left:.25in;margin-bottom:.5in">Select the type of information</h4>
+<h4 style="margin-left:.25in;margin-bottom:.5in">Enter Train Information</h4>
 
-
+<div class="input-field inline" style="width: 90%;margin-left:.25in">
+    <input id="trainName" class="train-name" type="text" onchange="$('#trainName').removeClass('invalid');">
+    <label for="trainName">Train Line</label>
 </div>
+<div class="input-field inline" style="width: 90%;margin-left:.25in">
+    <input id="seatNum" class="seat-num" type="text" onchange="$('#seatNum').removeClass('invalid');">
+    <label for="seatNum">Seat Number</label>
+</div>
+<div class="input-field inline" style="width: 90%;margin-left:.25in">
+    <input id="depart-date" class="datepicker depart-date" type="text" onchange="$('#depart-date').removeClass('invalid');">
+    <label for="depart-date">Departure Date</label>
+</div>
+<div class="input-field inline" style="width: 90%;margin-left:.25in">
+    <input id="depart-time" class="timepicker depart-time" type="text" onchange="$('#depart-time').removeClass('invalid');">
+    <label for="depart-time">Departure Time</label>
+</div>
+<button id="createTrain" class="modal-trigger primary-btn btn-floating btn-large waves-effect waves-light red"><i class="icon-done"></i></button>
+
+<script>
+    // Confirming the create action dialog
+    $("#createTrain").on("click", function(){
+        let trainName = $("#trainName").val();
+        let seatNum = $("#seatNum").val();
+        let departTime = $("#depart-time").val();
+        let departDate = $("#depart-date").val();
+        let valid = true;
+        if(trainName == ""){valid = false; $("#trainName").addClass("invalid");}
+        if(seatNum == ""){valid = false; $("#seatNum").addClass("invalid");}
+        if(departTime == ""){valid = false; $("#depart-time").addClass("invalid");}
+        if(departDate == ""){valid = false; $("#depart-date").addClass("invalid");}
+        if(valid) {
+            newTrain(trainName, seatNum, departTime, departDate);
+            window.location.href = "../travel.html";
+        }
+    });
+</script>
 
 </body>
 </html>

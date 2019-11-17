@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Edit</title>
+    <title>Flight Information</title>
 
     <script src="../cordova.js"></script>
     <script src="../js/jquery.min.js"></script>
@@ -17,7 +17,7 @@
 
 <nav id="header" class="red">
     <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="icon-menu"></i></a>
-    <h5>New Information</h5>
+    <h5>Flight Information</h5>
 </nav>
 
 <ul id="sidenav" class="sidenav">
@@ -35,16 +35,20 @@
 <h4 style="margin-left:.25in;margin-bottom:.5in">Enter Flight Information</h4>
 
 <div class="input-field inline" style="width: 90%;margin-left:.25in">
-    <input id="airlineName" class="airline-name" type="text">
+    <input id="airlineName" class="airline-name" type="text" onchange="$('#airlineName').removeClass('invalid');">
     <label for="airlineName">Airline</label>
 </div>
 <div class="input-field inline" style="width: 90%;margin-left:.25in">
-    <input id="seatNum" class="seat-num" type="text">
+    <input id="seatNum" class="seat-num" type="text" onchange="$('#seatNum').removeClass('invalid');">
     <label for="seatNum">Seat Number</label>
 </div>
 <div class="input-field inline" style="width: 90%;margin-left:.25in">
-    <input id="time" class="depart-time" type="text">
-    <label for="time">Departure Time</label>
+    <input id="depart-date" class="datepicker depart-date" type="text" onchange="$('#depart-date').removeClass('invalid');">
+    <label for="depart-date">Departure Date</label>
+</div>
+<div class="input-field inline" style="width: 90%;margin-left:.25in">
+    <input id="depart-time" class="timepicker depart-time" type="text" onchange="$('#depart-time').removeClass('invalid');">
+    <label for="depart-time">Departure Time</label>
 </div>
 <button id="createFlight" class="modal-trigger primary-btn btn-floating btn-large waves-effect waves-light red"><i class="icon-done"></i></button>
 
@@ -53,9 +57,17 @@
     $("#createFlight").on("click", function(){
         let airlineName = $("#airlineName").val();
         let seatNum = $("#seatNum").val();
-        let departTime = $("#time").val();
-        let id = newFlight(airlineName, seatNum, departTime);
-        window.location.href = "../travel.html";
+        let departTime = $("#depart-time").val();
+        let departDate = $("#depart-date").val();
+        let valid = true;
+        if(airlineName == ""){valid = false; $("#airlineName").addClass("invalid");}
+        if(seatNum == ""){valid = false; $("#seatNum").addClass("invalid");}
+        if(departTime == ""){valid = false; $("#depart-time").addClass("invalid");}
+        if(departDate == ""){valid = false; $("#depart-date").addClass("invalid");}
+        if(valid) {
+            newFlight(airlineName, seatNum, departTime, departDate);
+            window.location.href = "../travel.html";
+        }
     });
 </script>
 

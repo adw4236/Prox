@@ -16,20 +16,41 @@ let connectionId = query.get('connection');
 
 let flight = flightId ? flights[flightId] : null;
 let train = trainId ? trains[trainId] : null;
-let hotel = hotelId ? hotels[flightId] : null;
+let hotel = hotelId ? hotels[hotelId] : null;
 let connection = connectionId ? connections[connectionId] : null;
 
 document.addEventListener("deviceready", function(){
+    // always set up date/time pickers if they exist
+    $(".timepicker").timepicker();
+    $(".datepicker").datepicker();
+
     // Set values of object being edited
     if(flight) {
         $(".airline-name").val(flight.airlineName);
         $(".seat-num").val(flight.seatNum);
         $(".depart-time").val(flight.departTime);
+        $(".depart-date").val(flight.departDate);
         M.updateTextFields();
         }
-    if(train) $(".train-name").html.train.name;
-    if(hotel) $(".hotel-name").html.hotel.name;
-    if(connection) $(".connection-name").html.connection.name;
+    if(train){
+        $(".train-name").val(train.lineName);
+        $(".seat-num").val(train.seatNum);
+        $(".depart-time").val(train.departTime);
+        $(".depart-date").val(train.departDate);
+        M.updateTextFields();
+    }
+    if(hotel){
+        $(".name").val(hotel.name);
+        $(".address").val(hotel.address);
+        $(".reservationDate").val(hotel.reservationDate);
+        M.updateTextFields();
+    }
+    if(connection) {
+        $(".name").val(connection.name);
+        $(".email").val(connection.email);
+        $(".password").val(connection.password);
+        M.updateTextFields();
+    }
 });
 
 /**
@@ -39,9 +60,9 @@ document.addEventListener("deviceready", function(){
  * @param departTime the time of the departure
  * @returns {number} The id of the flight (index in the flights list)
  */
-function newFlight(airlineName, seatNum, departTime){
+function newFlight(airlineName, seatNum, departTime, departDate){
     if(flight !== null) removeFlight(flight);
-    flights.push({airlineName: airlineName, seatNum: seatNum, departTime: departTime});
+    flights.push({airlineName: airlineName, seatNum: seatNum, departTime: departTime, departDate: departDate});
     saveFlights();
     return flights.length - 1;
 }
@@ -53,8 +74,9 @@ function newFlight(airlineName, seatNum, departTime){
  * @param departTime the time of the departure
  * @returns {number} The id of the train (index in the trains list)
  */
-function newTrain(lineName, seatNum, departTime){
-    trains.push({lineName: lineName, seatNum: seatNum, departTime: departTime});
+function newTrain(lineName, seatNum, departTime, departDate){
+    if(train !== null) removeTrain(train);
+    trains.push({lineName: lineName, seatNum: seatNum, departTime: departTime, departDate: departDate});
     saveTrains();
     return trains.length - 1;
 }
@@ -66,8 +88,9 @@ function newTrain(lineName, seatNum, departTime){
  * @param reservationDate the date of the reservation
  * @returns {number} The id of the hotel (index in the hotels list)
  */
-function newHotel(hotelName, address, reservationDate){
-    hotels.push({hotelName: hotelName, address: address, reservationDate: reservationDate});
+function newHotel(name, address, reservationDate){
+    if(hotel !== null) removeHotel(train);
+    hotels.push({name: name, address: address, reservationDate: reservationDate});
     saveHotels();
     return hotels.length - 1;
 }
@@ -79,8 +102,9 @@ function newHotel(hotelName, address, reservationDate){
  * @param password the password of the email address
  * @returns {number} The id of the connection (index in the connections list)
  */
-function newConnection(email, username, password){
-    connections.push({email: email, username: username, password: password});
+function newConnection(name, email, password){
+    if(connection !== null) removeConnection(connection);
+    connections.push({name: name, email: email, password: password});
     saveConnections();
     return connections.length - 1;
 }
@@ -144,18 +168,18 @@ document.addEventListener("deviceready", function() {
 
             // Populate the flights template here
             flightElement.attr("href", flightElement.attr("href") + id);
-            flightElement.find(".name").html(flight.airlineName + " " + flight.departTime);
+            flightElement.find(".name").html(flight.airlineName + " " + flight.departDate);
 
-            flightElement.find(".delete").on("click", function (e) {
+            flightElement.find(".delete-flight").on("click", function (e) {
                 e.preventDefault();
 
                 let confirmDialogFlight = $("#confirmDeleteFlight");
-                confirmDialogFlight.find("#deletingFlight").html(flight.airlineName+" "+flight.departTime);
+                confirmDialogFlight.find("#deletingFlight").html(flight.airlineName+" "+flight.departDate);
                 let confirmFlight = M.Modal.getInstance(confirmDialogFlight);
                 confirmFlight.open();
 
                 let cancelFlight = confirmDialogFlight.find("#cancelDeleteFlight");
-                let okFlight = confirmDialogFlight.find("#deleteActionFlight");
+                let okFlight = confirmDialogFlight.find("#deleteFlight");
                 cancelFlight.on("click", function () {
                     confirmFlight.close();
                     cancelFlight.off("click");
@@ -183,18 +207,18 @@ document.addEventListener("deviceready", function() {
 
             // Populate the flights template here
             trainElement.attr("href", trainElement.attr("href") + id);
-            trainElement.find(".name").html(train.lineName + " " + train.departTime);
+            trainElement.find(".name").html(train.lineName + " " + train.departDate);
 
-            trainElement.find(".delete").on("click", function (e) {
+            trainElement.find(".delete-train").on("click", function (e) {
                 e.preventDefault();
 
-                let confirmDialogTrain = $("#confirmDeleteFlight");
-                confirmDialogTrain.find("#deletingTrain").html(train.lineName+" "+train.departTime);
+                let confirmDialogTrain = $("#confirmDeleteTrain");
+                confirmDialogTrain.find("#deletingTrain").html(train.lineName+" "+train.departDate);
                 let confirmTrain = M.Modal.getInstance(confirmDialogTrain);
                 confirmTrain.open();
 
                 let cancelTrain = confirmDialogTrain.find("#cancelDeleteTrain");
-                let okTrain = confirmDialogTrain.find("#deleteActionTrain");
+                let okTrain = confirmDialogTrain.find("#deleteTrain");
                 cancelTrain.on("click", function () {
                     confirmTrain.close();
                     cancelTrain.off("click");
@@ -221,18 +245,18 @@ document.addEventListener("deviceready", function() {
 
             // Populate the hotels template here
             hotelElement.attr("href", hotelElement.attr("href") + id);
-            hotelElement.find(".name").html(hotel.airlineName + " " + hotel.departTime);
+            hotelElement.find(".name").html(hotel.name + " " + hotel.reservationDate);
 
-            hotelElement.find(".delete").on("click", function (e) {
+            hotelElement.find(".delete-hotel").on("click", function (e) {
                 e.preventDefault();
 
                 let confirmDialogHotel = $("#confirmDeleteHotel");
-                confirmDialogHotel.find("#deletingHotel").html(hotel.airlineName+" "+hotel.departTime);
+                confirmDialogHotel.find("#deletingHotel").html(hotel.name+" "+hotel.reservationDate);
                 let confirmHotel = M.Modal.getInstance(confirmDialogHotel);
                 confirmHotel.open();
 
                 let cancelHotel = confirmDialogHotel.find("#cancelDeleteHotel");
-                let okHotel = confirmDialogHotel.find("#deleteActionHotel");
+                let okHotel = confirmDialogHotel.find("#deleteHotel");
                 cancelHotel.on("click", function () {
                     confirmHotel.close();
                     cancelHotel.off("click");
@@ -259,18 +283,18 @@ document.addEventListener("deviceready", function() {
 
             // Populate the connections template here
             connectionElement.attr("href", connectionElement.attr("href") + id);
-            connectionElement.find(".name").html(connection.airlineName + " " + connection.departTime);
+            connectionElement.find(".name").html(connection.name);
 
-            connectionElement.find(".delete").on("click", function (e) {
+            connectionElement.find(".delete-connection").on("click", function (e) {
                 e.preventDefault();
 
                 let confirmDialogConnection = $("#confirmDeleteConnection");
-                confirmDialogConnection.find("#deletingConnection").html(connection.airlineName+" "+connection.departTime);
+                confirmDialogConnection.find("#deletingConnection").html(connection.name);
                 let confirmConnection = M.Modal.getInstance(confirmDialogConnection);
                 confirmConnection.open();
 
                 let cancelConnection = confirmDialogConnection.find("#cancelDeleteConnection");
-                let okConnection = confirmDialogConnection.find("#deleteActionConnection");
+                let okConnection = confirmDialogConnection.find("#deleteConnection");
                 cancelConnection.on("click", function () {
                     confirmConnection.close();
                     cancelConnection.off("click");
@@ -287,46 +311,4 @@ document.addEventListener("deviceready", function() {
     else{
         $("#connections").append("<p style='text-decoration-color: grey'>no connections found</p>");
     }
-});
-
-document.addEventListener("deviceready", function() {
-
-    // Triggers
-
-    let triggersList = $("#triggers-list");
-    if(triggersList.length === 0) return;
-    if(!action || action.triggers === null) return;
-
-    let triggerTemplate = triggersList.find("#trigger-template");
-    action.triggers.forEach(function(trigger, id){
-        let triggerElement = triggerTemplate.clone();
-        triggerElement.removeAttr("id");
-
-        // Populate the trigger template here
-        triggerElement.attr("href", triggerElement.attr("href") + "?trigger=" + JSON.stringify(trigger) + "&action=" + actionId + "&triggerId=" + id);
-        triggerElement.find(".name").html(trigger.name);
-
-        triggersList.append(triggerElement);
-    });
-});
-
-document.addEventListener("deviceready", function() {
-
-    // Events
-
-    let eventsList = $("#events-list");
-    if(eventsList.length === 0) return;
-    if(!action || action.events === null) return;
-
-    let eventTemplate = eventsList.find("#event-template");
-    action.events.forEach(function(event, id){
-        let eventElement = eventTemplate.clone();
-        eventElement.removeAttr("id");
-
-        // Populate the event template here
-        eventElement.attr("href", eventElement.attr("href") + "?event=" + JSON.stringify(event) + "&action=" + actionId + "&eventId=" + id);
-        eventElement.find(".name").html(event.name);
-
-        eventsList.append(eventElement);
-    });
 });
