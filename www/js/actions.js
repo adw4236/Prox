@@ -108,7 +108,7 @@ document.addEventListener("deviceready", function() {
 
         // Populate the trigger template here
         triggerElement.attr("href", triggerElement.attr("href") + "?trigger=" + JSON.stringify(trigger) + "&action=" + actionId + "&triggerId=" + id);
-        triggerElement.find(".name").html("<p>" + trigger.name + "</p>");
+        triggerElement.find(".name").html(trigger.name);
 
         triggersList.append(triggerElement);
     });
@@ -129,7 +129,7 @@ document.addEventListener("deviceready", function() {
 
         // Populate the event template here
         eventElement.attr("href", eventElement.attr("href") + "?event=" + JSON.stringify(event) + "&action=" + actionId + "&eventId=" + id);
-        eventElement.find(".name").html("<p>" + event.name + "</p>");
+        eventElement.find(".name").html(event.name);
 
         eventsList.append(eventElement);
     });

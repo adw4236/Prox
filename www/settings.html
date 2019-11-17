@@ -11,6 +11,24 @@
 
         <link rel="stylesheet" type="text/css" href="css/general.css">
         <script type="text/javascript" src="js/general.js"></script>
+
+        <script>
+            document.addEventListener("deviceready", function(){
+                for(let key in localStorage){
+                    if(!localStorage.hasOwnProperty(key)) continue;
+                    if(!key.startsWith("Option")) continue;
+
+                    let id = key.replace("Option.", "");
+                    $("#" + id).prop("checked", localStorage.getItem(key) === "true");
+                }
+
+                $(".option").on("click", function(e){
+                    let id = $(e.target).attr("id");
+                    console.log(id);
+                    localStorage.setItem("Option." + id, $(e.target).is(":checked"));
+                });
+            });
+        </script>
     </head>
     <body>
 
@@ -29,6 +47,70 @@
             <li><a href="discovery.html"><i class="icon-discovery"></i>Discovery</a></li>
             <li><a href="packing.html"><i class="icon-packing"></i>Packing</a></li>
             <li><a href="settings.html"><i class="icon-settings"></i>Settings</a></li>
+        </ul>
+
+        <ul id="settings" class="collection with-header">
+            <li class="collection-header">
+                <h5>General Settings</h5>
+            </li>
+            <li class="collection-item">
+                Do Not Disturb Mode
+                <div class="secondary-content">
+                    <div class="switch">
+                        <label>
+                            <input class="option" id="do_not_disturb" type="checkbox">
+                            <span class="lever"></span>
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li class="collection-header">
+                <h5>Notification Settings</h5>
+            </li>
+            <li class="collection-item">
+                Action Notifications
+                <div class="secondary-content">
+                    <div class="switch">
+                        <label>
+                            <input class="option" id="actions_notifications" type="checkbox" checked>
+                            <span class="lever"></span>
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li class="collection-item">
+                Travel Notifications
+                <div class="secondary-content">
+                    <div class="switch">
+                        <label>
+                            <input class="option" id="travel_notifications" type="checkbox" checked>
+                            <span class="lever"></span>
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li class="collection-item">
+                Discovery Notifications
+                <div class="secondary-content">
+                    <div class="switch">
+                        <label>
+                            <input class="option" id="discovery_notifications" type="checkbox" checked>
+                            <span class="lever"></span>
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li class="collection-item">
+                Packing Notifications
+                <div class="secondary-content">
+                    <div class="switch">
+                        <label>
+                            <input  class="option" id="packing_notifications" type="checkbox" checked>
+                            <span class="lever"></span>
+                        </label>
+                    </div>
+                </div>
+            </li>
         </ul>
 
     </body>

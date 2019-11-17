@@ -32,20 +32,39 @@
     font-size: 20px;
 }
 
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #ff877e;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #F44336;
+}
+
 .primary-btn{
     position: fixed;
     right: 10px;
     bottom: 10px;
 }
 
-#actions-template, #trigger-template,#event-template{
+#actions-template,#flights-template,#connections-template,#hotels-template,#trains-template, #trigger-template,#event-template{
     display: none;
 }
-#actions, #triggers-list,#events-list{
+#actions, #flights, #hotels, #trains, #connections, #triggers-list,#events-list{
     border: none;
 }
-#actions a, #triggers-list a, #events-list a{
+#actions a, #flights a, #hotels a, #trains a, #connections a, #triggers-list a, #events-list a{
     cursor: pointer;
     color: black;
     font-size: 20px;
+}
+
+#settings{
+    border: none;
+}
+#settings .collection-item{
+    border: none;
+    font-size: 16px;
+}
+#settings .collection-header{
+    color: gray;
 }

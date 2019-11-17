@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Connection Information</title>
+
+    <script src="../cordova.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/materialize.min.css" />
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <link rel="stylesheet" href="../css/icons.css" />
+
+    <link rel="stylesheet" type="text/css" href="../css/general.css">
+    <script type="text/javascript" src="../js/general.js"></script>
+    <script src="../js/travel.js"></script>
+</head>
+<body>
+
+<nav id="header" class="red">
+    <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="icon-menu"></i></a>
+    <h5>Connection Information</h5>
+</nav>
+
+<ul id="sidenav" class="sidenav">
+    <li id="nav_title" class="red">
+        <h4>Menu</h4>
+    </li>
+    <li><a href="../index.html"><i class="icon-home"></i>Home</a></li>
+    <li><a href="../actions.html"><i class="icon-actions"></i>Actions</a></li>
+    <li><a href="../travel.html"><i class="icon-travel"></i>Travel</a></li>
+    <li><a href="../discovery.html"><i class="icon-discovery"></i>Discovery</a></li>
+    <li><a href="../packing.html"><i class="icon-packing"></i>Packing</a></li>
+    <li><a href="../settings.html"><i class="icon-settings"></i>Settings</a></li>
+</ul>
+
+<h4 style="margin-left:.25in;margin-bottom:.5in">Enter Connection Information</h4>
+
+<div class="input-field inline" style="width: 90%;margin-left:.25in">
+    <input id="name" class="name" type="text" onchange="$('#name').removeClass('invalid');">
+    <label for="name">Account Name</label>
+</div>
+<div class="input-field inline" style="width: 90%;margin-left:.25in">
+    <input id="email" class="email" type="text" onchange="$('#email').removeClass('invalid');">
+    <label for="email">Email Account</label>
+</div>
+<div class="input-field inline" style="width: 90%;margin-left:.25in">
+    <input id="password" class="password" type="password" onchange="$('#password').removeClass('invalid');">
+    <label for="password">Account Password</label>
+</div>
+<button id="createConnection" class="modal-trigger primary-btn btn-floating btn-large waves-effect waves-light red"><i class="icon-done"></i></button>
+
+<script>
+    // Confirming the create action dialog
+    $("#createConnection").on("click", function(){
+        let email = $("#email").val();
+        let name = $("#name").val();
+        let password = $("#password").val();
+        let valid = true;
+        if(email == ""){valid = false; $("#email").addClass("invalid");}
+        if(name == ""){valid = false; $("#name").addClass("invalid");}
+        if(password == ""){valid = false; $("#password").addClass("invalid");}
+        if(valid) {
+            newConnection(name, email, password);
+            window.location.href = "../travel.html";
+        }
+    });
+</script>
+
+</body>
+</html>
