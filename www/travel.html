@@ -11,6 +11,7 @@
 
         <link rel="stylesheet" type="text/css" href="css/general.css">
         <script type="text/javascript" src="js/general.js"></script>
+        <script type="text/javascript" src="js/travel.js"></script>
     </head>
     <body>
 
@@ -30,6 +31,91 @@
             <li><a href="packing.html"><i class="icon-packing"></i>Packing</a></li>
             <li><a href="settings.html"><i class="icon-settings"></i>Settings</a></li>
         </ul>
+
+        <h4 style="margin-left:.25in">Flights</h4>
+
+        <div id="flights" class="collection" style="margin-left:.5in">
+            <a href="travel/flightinfo.html?flight=" id="flights-template" class="collection-item">
+                <span class="name"></span>
+                <i style="float: right; font-size: 20px;" class="delete icon-delete"></i>
+            </a>
+        </div>
+
+        <h4 style="margin-left:.25in">Trains</h4>
+
+        <div id="trains" class="collection" style="margin-left:.5in">
+            <a href="travel/traininfo.html?train=" id="trains-template" class="collection-item">
+                <span class="name"></span>
+                <i style="float: right; font-size: 20px;" class="delete icon-delete"></i>
+            </a>
+        </div>
+
+        <h4 style="margin-left:.25in">Hotels</h4>
+
+        <div id="hotels" class="collection"  style="margin-left:.5in">
+            <a href="travel/hotelinfo.html?hotel=" id="hotels-template" class="collection-item">
+                <span class="name"></span>
+                <i style="float: right; font-size: 20px;" class="delete icon-delete"></i>
+            </a>
+        </div>
+
+        <h4 style="margin-left:.25in">Connections</h4>
+
+        <div id="connections" class="collection" style="margin-left:.5in">
+            <a href="travel/connect.html?connection=" id="connections-template" class="collection-item">
+                <span class="name"></span>
+                <i style="float: right; font-size: 20px;" class="delete icon-delete"></i>
+            </a>
+        </div>
+
+        <button id="createTravel" class="modal-trigger primary-btn btn-floating btn-large waves-effect waves-light red"><i class="icon-add"></i></button>
+
+        <div id="confirmDeleteFlight" class="modal">
+            <div class="modal-content">
+                <span>Are you sure you want to delete <span id="deletingFlight"></span>?</span>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelDeleteFlight" class="btn-floating btn-big waves-effect waves-light red"><i class="icon-x"></i></button>
+                <button id="deleteActionFlight" class="btn-floating btn-big waves-effect waves-light red" style="margin-right: 10px;"><i class="icon-delete"></i></button>
+            </div>
+        </div>
+
+        <div id="confirmDeleteTrain" class="modal">
+            <div class="modal-content">
+                <span>Are you sure you want to delete <span id="deletingTrain"></span>?</span>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelDeleteTrain" class="btn-floating btn-big waves-effect waves-light red"><i class="icon-x"></i></button>
+                <button id="deleteActionTrain" class="btn-floating btn-big waves-effect waves-light red" style="margin-right: 10px;"><i class="icon-delete"></i></button>
+            </div>
+        </div>
+
+        <div id="confirmDeleteHotel" class="modal">
+            <div class="modal-content">
+                <span>Are you sure you want to delete <span id="deletingHotel"></span>?</span>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelDeleteHotel" class="btn-floating btn-big waves-effect waves-light red"><i class="icon-x"></i></button>
+                <button id="cancelDeleteHotel" class="btn-floating btn-big waves-effect waves-light red" style="margin-right: 10px;"><i class="icon-delete"></i></button>
+            </div>
+        </div>
+
+        <div id="confirmDeleteConnection" class="modal">
+            <div class="modal-content">
+                <span>Are you sure you want to delete <span id="deletingConnection"></span>?</span>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelDeleteConnection" class="btn-floating btn-big waves-effect waves-light red"><i class="icon-x"></i></button>
+                <button id="deleteActionConnection" class="btn-floating btn-big waves-effect waves-light red" style="margin-right: 10px;"><i class="icon-delete"></i></button>
+            </div>
+        </div>
+
+        <script>
+            // Confirming the create action dialog
+            $("#createTravel").on("click", function(){
+                window.location.href = "travel/newinfo.html";
+            });
+        </script>
 
     </body>
 </html>
