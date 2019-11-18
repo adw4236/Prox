@@ -10,6 +10,9 @@
         <link rel="stylesheet" href="css/icons.css" />
         <link rel="stylesheet" type="text/css" href="css/general.css">
         <script type="text/javascript" src="js/general.js"></script>
+        <style>
+
+        </style>
     </head>
     <body>
 
@@ -31,15 +34,22 @@
         </ul>
 
         <div id="locations" class="collection">
-            <a href="#" id="locations-template" class="collection-item">
-                <span class="name"></span>
-                <span class="desc"></span>
-                <i style="float: right; font-size: 20px;" class="delete icon-like"></i>
-                <i style="float: right; font-size: 20px;" class="delete icon-discovery"></i>
-                <div style="width:100%;height:400px;overflow:hidden;background-color:grey;">
+            <div id="locations-template" class="card">
+                <table>
+                    <tr>
+                        <td>
+                            <h3 class="name"></h3>
+                            <span style="padding:0px;display:block;" class="desc"></span></td>
+                        <td> 
+                            <i style="float:right;font-size:4em;padding:10px;color:gray;" class="icon-like"></i>
+                            <i style="float:right;font-size:4em;padding:10px;color:gray;" class="icon-discovery"></i>
+                        </td>
+                    </tr>
+                </table>
+                <div style="width:100%;height:300px;overflow:hidden;">
                     <img style="width:100%" class="location-img" src="imgs/no.jpg">
-                <div>
-            </a>
+                </div>
+            </div>
         </div>
         <script type="text/javascript" src="js/discovery.js"></script>
     </body>

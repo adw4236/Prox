@@ -46,10 +46,10 @@
     bottom: 10px;
 }
 
-#actions-template,#flights-template,#connections-template,#hotels-template,#trains-template, #trigger-template,#event-template{
+#actions-template,#flights-template,#connections-template,#hotels-template,#trains-template, #trigger-template,#event-template,#locations-template{
     display: none;
 }
-#actions, #flights, #hotels, #trains, #connections, #triggers-list,#events-list{
+#actions, #flights, #hotels, #trains, #connections, #triggers-list,#events-list,#locations{
     border: none;
 }
 #actions a, #flights a, #hotels a, #trains a, #connections a, #triggers-list a, #events-list a{
