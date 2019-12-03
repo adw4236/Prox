@@ -5,19 +5,16 @@
 let flights = JSON.parse(localStorage.getItem("flights")) || [];
 let trains = JSON.parse(localStorage.getItem("trains")) || [];
 let hotels = JSON.parse(localStorage.getItem("hotels")) || [];
-let connections = JSON.parse(localStorage.getItem("connections")) || [];
 
 // Gets a specific object if it is passed in by the query string.
 let query = new URLSearchParams(window.location.search);
 let flightId = query.get('flight');
 let trainId = query.get('train');
 let hotelId = query.get('hotel');
-let connectionId = query.get('connection');
 
 let flight = flightId ? flights[flightId] : null;
 let train = trainId ? trains[trainId] : null;
 let hotel = hotelId ? hotels[hotelId] : null;
-let connection = connectionId ? connections[connectionId] : null;
 
 document.addEventListener("deviceready", function(){
     // always set up date/time pickers if they exist
@@ -43,12 +40,6 @@ document.addEventListener("deviceready", function(){
         $(".name").val(hotel.name);
         $(".address").val(hotel.address);
         $(".reservationDate").val(hotel.reservationDate);
-        M.updateTextFields();
-    }
-    if(connection) {
-        $(".name").val(connection.name);
-        $(".email").val(connection.email);
-        $(".password").val(connection.password);
         M.updateTextFields();
     }
 });
@@ -95,20 +86,6 @@ function newHotel(name, address, reservationDate){
     return hotels.length - 1;
 }
 
-/**
- * Creates a new email connection and saves it in storage.
- * @param email the name of the service to connect to
- * @param username the email address to connect to
- * @param password the password of the email address
- * @returns {number} The id of the connection (index in the connections list)
- */
-function newConnection(name, email, password){
-    if(connection !== null) removeConnection(connection);
-    connections.push({name: name, email: email, password: password});
-    saveConnections();
-    return connections.length - 1;
-}
-
 
 /**
  * Removes a flight and saves the changes to local storage
@@ -126,10 +103,6 @@ function removeHotel(id){
     hotels.splice(id,1);
     saveHotels();
 }
-function removeConnection(id){
-    connections.splice(id,1);
-    saveConnections();
-}
 
 /**
  * Saves the list of flights to local storage, should be called after any modifications.  This is automatically
@@ -144,10 +117,6 @@ function saveTrains(){
 function saveHotels(){
     localStorage.setItem("hotels", JSON.stringify(hotels));
 }
-function saveConnections(){
-    localStorage.setItem("connections", JSON.stringify(connections));
-}
-
 /**
  * Initializes the UI for the objects by iterating through the objects list and copying the
  * template for each object, then filling in the information on the copied template and appending
@@ -272,43 +241,5 @@ document.addEventListener("deviceready", function() {
     }
     else{
         $("#hotels").append("<p style='text-decoration-color: grey'>no hotels found</p>");
-    }
-
-    let connectionsList = $("#connections");
-    if (connections.length > 0) {
-        let template = connectionsList.find("#connections-template");
-        connections.forEach(function (connection, id) {
-            let connectionElement = template.clone();
-            connectionElement.removeAttr("id");
-
-            // Populate the connections template here
-            connectionElement.attr("href", connectionElement.attr("href") + id);
-            connectionElement.find(".name").html(connection.name);
-
-            connectionElement.find(".delete-connection").on("click", function (e) {
-                e.preventDefault();
-
-                let confirmDialogConnection = $("#confirmDeleteConnection");
-                confirmDialogConnection.find("#deletingConnection").html(connection.name);
-                let confirmConnection = M.Modal.getInstance(confirmDialogConnection);
-                confirmConnection.open();
-
-                let cancelConnection = confirmDialogConnection.find("#cancelDeleteConnection");
-                let okConnection = confirmDialogConnection.find("#deleteConnection");
-                cancelConnection.on("click", function () {
-                    confirmConnection.close();
-                    cancelConnection.off("click");
-                    okConnection.off("click");
-                });
-                okConnection.on("click", function () {
-                    removeConnection(id);
-                    location.reload();
-                });
-            });
-            connectionsList.append(connectionElement);
-        });
-    }
-    else{
-        $("#connections").append("<p style='text-decoration-color: grey'>no connections found</p>");
     }
 });

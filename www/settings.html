@@ -11,6 +11,7 @@
 
         <link rel="stylesheet" type="text/css" href="css/general.css">
         <script type="text/javascript" src="js/general.js"></script>
+        <script type="text/javascript" src="js/settings.js"></script>
 
         <script>
             document.addEventListener("deviceready", function(){
@@ -111,7 +112,36 @@
                     </div>
                 </div>
             </li>
+            <li class="collection-header">
+                <h5>Connected Accounts</h5>
+            </li>
+
+
+        <div id="connections" class="collection" style="margin-left:.5in">
+            <a href="connect.html?connection=" id="connections-template" class="collection-item">
+                <span class="name"></span>
+                <i style="margin-right:.5in; float: right; font-size: 20px;" class="delete-connection icon-delete"></i>
+            </a>
+        </div>
         </ul>
+        <div id="confirmDeleteConnection" class="modal">
+            <div class="modal-content">
+                <span>Are you sure you want to delete <span id="deletingConnection"></span>?</span>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelDeleteConnection" class="btn-floating btn-big waves-effect waves-light red"><i class="icon-x"></i></button>
+                <button id="deleteConnection" class="btn-floating btn-big waves-effect waves-light red" style="margin-right: 10px;"><i class="icon-delete"></i></button>
+            </div>
+        </div>
+
+        <button id="CreateConnection" class="modal-trigger primary-btn btn-floating btn-large waves-effect waves-light red"><i class="icon-add"></i></button>
+
+        <script>
+            // Confirming the create action dialog
+            $("#CreateConnection").on("click", function(){
+                window.location.href = "connect.html";
+            });
+        </script>
 
     </body>
 </html>

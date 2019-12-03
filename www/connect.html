@@ -3,15 +3,15 @@
 <head>
     <title>Connection Information</title>
 
-    <script src="../cordova.js"></script>
-    <script src="../js/jquery.min.js"></script>
-    <link rel="stylesheet" href="../css/materialize.min.css" />
-    <script type="text/javascript" src="../js/materialize.min.js"></script>
-    <link rel="stylesheet" href="../css/icons.css" />
+    <script src="cordova.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/materialize.min.css" />
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <link rel="stylesheet" href="css/icons.css" />
 
-    <link rel="stylesheet" type="text/css" href="../css/general.css">
-    <script type="text/javascript" src="../js/general.js"></script>
-    <script src="../js/travel.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/general.css">
+    <script type="text/javascript" src="js/general.js"></script>
+    <script src="js/settings.js"></script>
 </head>
 <body>
 
@@ -24,12 +24,12 @@
     <li id="nav_title" class="red">
         <h4>Menu</h4>
     </li>
-    <li><a href="../index.html"><i class="icon-home"></i>Home</a></li>
-    <li><a href="../actions.html"><i class="icon-actions"></i>Actions</a></li>
-    <li><a href="../travel.html"><i class="icon-travel"></i>Travel</a></li>
-    <li><a href="../discovery.html"><i class="icon-discovery"></i>Discovery</a></li>
-    <li><a href="../packing.html"><i class="icon-packing"></i>Packing</a></li>
-    <li><a href="../settings.html"><i class="icon-settings"></i>Settings</a></li>
+    <li><a href="index.html"><i class="icon-home"></i>Home</a></li>
+    <li><a href="actions.html"><i class="icon-actions"></i>Actions</a></li>
+    <li><a href="travel.html"><i class="icon-travel"></i>Travel</a></li>
+    <li><a href="discovery.html"><i class="icon-discovery"></i>Discovery</a></li>
+    <li><a href="packing.html"><i class="icon-packing"></i>Packing</a></li>
+    <li><a href="settings.html"><i class="icon-settings"></i>Settings</a></li>
 </ul>
 
 <h4 style="margin-left:.25in;margin-bottom:.5in">Enter Connection Information</h4>
@@ -60,7 +60,7 @@
         if(password == ""){valid = false; $("#password").addClass("invalid");}
         if(valid) {
             newConnection(name, email, password);
-            window.location.href = "../travel.html";
+            window.location.href = "settings.html";
         }
     });
 </script>
