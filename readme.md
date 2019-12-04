@@ -38,3 +38,24 @@ Plug in your android device or run an emulator, if you are using a physical devi
 developer mode must be enabled.
 
 Run the cordova app for android `cordova run android`
+
+## Features
+
+This is only a prototype and some features of the application are yet to be developed.
+
+The following features are not developed:
+- Trigger creation / edit pages
+- Event creation / edit pages
+- Packing List
+- Dynamic discovery
+- Home screen feed
+- Notifications
+- Account integration
+
+Other planned changes
+- Grouping travel information / packing lists by trip
+- More detailed settings
+- Make form fields more forgiving when you enter in something wrong
+- Consistency changes
+- Clicking on items displays information, not straight to edit
+- In general, more information for list items
