@@ -33,21 +33,14 @@
     <body>
 
         <nav id="header" class="red">
-            <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="icon-menu"></i></a>
+            <a href="edit.html" id="back" class="sidenav-trigger"><i class="icon-back"></i></a>
+            <script>
+                document.addEventListener("deviceready", function(){
+                    $("#back").attr("href", $("#back").attr("href") + "?action=" + actionId);
+                })
+            </script>
             <h5 class="action-name"></h5>
         </nav>
-
-        <ul id="sidenav" class="sidenav">
-            <li id="nav_title" class="red">
-                <h4>Menu</h4>
-            </li>
-            <li><a href="../index.html"><i class="icon-home"></i>Home</a></li>
-            <li><a href="../actions.html"><i class="icon-actions"></i>Actions</a></li>
-            <li><a href="../travel.html"><i class="icon-travel"></i>Travel</a></li>
-            <li><a href="../discovery.html"><i class="icon-discovery"></i>Discovery</a></li>
-            <li><a href="../packing.html"><i class="icon-packing"></i>Packing</a></li>
-            <li><a href="../settings.html"><i class="icon-settings"></i>Settings</a></li>
-        </ul>
 
         <div id="notification" style="display: none">
             Notification
