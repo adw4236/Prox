@@ -110,6 +110,29 @@ document.addEventListener("deviceready", function() {
         triggerElement.attr("href", triggerElement.attr("href") + "?trigger=" + JSON.stringify(trigger) + "&action=" + actionId + "&triggerId=" + id);
         triggerElement.find(".name").html(trigger.name);
 
+        triggerElement.find(".delete").on("click", function(e){
+            e.preventDefault();
+
+            let confirmDialog = $("#confirmDelete");
+            confirmDialog.find("#deletingType").html("trigger");
+            confirmDialog.find("#deletingName").html(trigger.name);
+            let confirm = M.Modal.getInstance(confirmDialog);
+            confirm.open();
+
+            let cancel = confirmDialog.find("#cancelDelete");
+            let ok = confirmDialog.find("#deleteItem");
+            cancel.on("click", function(){
+                confirm.close();
+                cancel.off("click");
+                ok.off("click");
+            });
+            ok.on("click", function(){
+                action.triggers.splice(id,1);
+                saveActions();
+                location.reload();
+            });
+        });
+
         triggersList.append(triggerElement);
     });
 });
@@ -130,6 +153,29 @@ document.addEventListener("deviceready", function() {
         // Populate the event template here
         eventElement.attr("href", eventElement.attr("href") + "?event=" + JSON.stringify(event) + "&action=" + actionId + "&eventId=" + id);
         eventElement.find(".name").html(event.name);
+
+        eventElement.find(".delete").on("click", function(e){
+            e.preventDefault();
+
+            let confirmDialog = $("#confirmDelete");
+            confirmDialog.find("#deletingType").html("event");
+            confirmDialog.find("#deletingName").html(event.name);
+            let confirm = M.Modal.getInstance(confirmDialog);
+            confirm.open();
+
+            let cancel = confirmDialog.find("#cancelDelete");
+            let ok = confirmDialog.find("#deleteItem");
+            cancel.on("click", function(){
+                confirm.close();
+                cancel.off("click");
+                ok.off("click");
+            });
+            ok.on("click", function(){
+                action.events.splice(id,1);
+                saveActions();
+                location.reload();
+            });
+        });
 
         eventsList.append(eventElement);
     });

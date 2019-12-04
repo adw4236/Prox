@@ -41,6 +41,7 @@
             <div id="triggers-list" class="collection">
                 <a href="trigger.html" id="trigger-template" class="collection-item">
                     <span class="name"></span>
+                    <i style="float: right; font-size: 20px;" class="delete icon-delete"></i>
                 </a>
             </div>
 
@@ -69,6 +70,7 @@
             <div id="events-list" class="collection">
                 <a href="event.html" id="event-template" class="collection-item">
                     <span class="name"></span>
+                    <i style="float: right; font-size: 20px;" class="delete icon-delete"></i>
                 </a>
             </div>
 
@@ -91,6 +93,16 @@
                         $(this).attr("href", $(this).attr("href") + "&action=" + actionId);
                     });
                 </script>
+            </div>
+        </div>
+
+        <div id="confirmDelete" class="modal">
+            <div class="modal-content">
+                <span>Delete <span id="deletingName"></span> <span id="deletingType"></span>?</span>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelDelete" class="btn waves-effect waves-light red"><i class="icon-x"></i> Cancel</button>
+                <button id="deleteItem" class="btn waves-effect waves-light red" style="margin-right: 10px;"><i class="icon-delete"></i> Delete</button>
             </div>
         </div>
 
