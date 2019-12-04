@@ -40,6 +40,14 @@
     background-color: #F44336;
 }
 
+.help-text{
+    margin: 10px auto 0 auto;
+    width: 95%;
+    padding:50px;
+    border: 2px dashed #EA9F9F;
+    display: none;
+}
+
 .primary-btn{
     position: fixed;
     right: 10px;

@@ -58,6 +58,11 @@ document.addEventListener("deviceready", function() {
     let actionsList = $("#actions");
     if (actionsList.length === 0) return;
 
+    if(actions.length === 0){
+        $("#empty-actions").css("display", "block");
+        return;
+    }
+
     let template = actionsList.find("#actions-template");
     actions.forEach(function (action, id) {
         let actionElement = template.clone();
@@ -100,6 +105,11 @@ document.addEventListener("deviceready", function() {
     let triggersList = $("#triggers-list");
     if(triggersList.length === 0) return;
     if(!action || action.triggers === null) return;
+
+    if(action.triggers.length === 0){
+        $("#empty-triggers").css("display", "block");
+        return;
+    }
 
     let triggerTemplate = triggersList.find("#trigger-template");
     action.triggers.forEach(function(trigger, id){
@@ -144,6 +154,11 @@ document.addEventListener("deviceready", function() {
     let eventsList = $("#events-list");
     if(eventsList.length === 0) return;
     if(!action || action.events === null) return;
+
+    if(action.events.length === 0){
+        $("#empty-events").css("display", "block");
+        return;
+    }
 
     let eventTemplate = eventsList.find("#event-template");
     action.events.forEach(function(event, id){
