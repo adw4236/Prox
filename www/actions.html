@@ -12,6 +12,17 @@
         <link rel="stylesheet" type="text/css" href="css/general.css">
         <script type="text/javascript" src="js/general.js"></script>
         <script src="js/actions.js"></script>
+
+        <style>
+            input[type=text]:not(.browser-default):focus:not([readonly])+label{
+                color: #f44336;
+            }
+            input[type=text]:not(.browser-default):focus:not([readonly]){
+                border-bottom: 1px solid #f44336;
+                -webkit-box-shadow: 0 1px 0 0 #f44336;
+                box-shadow: 0 1px 0 0 #f44336;
+            }
+        </style>
     </head>
     <body>
 
